@@ -1,0 +1,77 @@
+$ kubectl get deployment -n lab4
+NAME       READY   UP-TO-DATE   AVAILABLE   AGE  
+my-pod-2   2/2     2            2           8m53s
+my-pod-3   3/3     3            3           2m39s
+
+$ kubectl get ingress -n lab4
+NAME           CLASS   HOSTS                ADDRESS        PORTS   AGE  
+my-ingress-1   nginx   my-1.cluster.local   192.168.49.2   80      33m  
+my-ingress-2   nginx   my-2.cluster.local   192.168.49.2   80      9m39s
+my-ingress-3   nginx   my-3.cluster.local   192.168.49.2   80      3m25s
+
+$ kubectl get service -n lab4
+NAME           TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)   AGE  
+my-service-1   ClusterIP   10.110.99.253    <none>        80/TCP    35m  
+my-service-2   ClusterIP   10.100.178.238   <none>        80/TCP    9m59s
+my-service-3   ClusterIP   10.100.150.27    <none>        80/TCP    3m45s
+
+$ kubectl get pod -n lab4
+NAME                        READY   STATUS    RESTARTS   AGE  
+my-pod-1                    1/1     Running   0          36m  
+my-pod-2-6d455bd7cc-djj9n   1/1     Running   0          5m51s
+my-pod-2-6d455bd7cc-v2stw   1/1     Running   0          7m8s 
+my-pod-3-7757fd6f9-dqdq9    1/1     Running   0          2m44s
+my-pod-3-7757fd6f9-pxrwd    1/1     Running   0          2m44s
+my-pod-3-7757fd6f9-xlzt7    1/1     Running   0          4m
+
+$ kubectl get events -n lab4
+LAST SEEN   TYPE     REASON              OBJECT                           MESSAGE
+13m         Normal   Sync                ingress/my-ingress-1             Scheduled for sync
+10m         Normal   Sync                ingress/my-ingress-2             Scheduled for sync
+3m23s       Normal   Sync                ingress/my-ingress-3             Scheduled for sync
+36m         Normal   Scheduled           pod/my-pod-1                     Successfully assigned lab4/my-pod-1 to minikube
+36m         Normal   Pulling             pod/my-pod-1                     Pulling image "nginx:alpine"   
+36m         Normal   Pulled              pod/my-pod-1                     Successfully pulled image "nginx:alpine" in 13.278s (13.278s including waiting). Image size: 53747275 bytes.
+36m         Normal   Created             pod/my-pod-1                     Created container: my-pod-1    
+36m         Normal   Started             pod/my-pod-1                     Started container my-pod-1     
+6m7s        Normal   Scheduled           pod/my-pod-2-6d455bd7cc-djj9n    Successfully assigned lab4/my-pod-2-6d455bd7cc-djj9n to minikube
+6m5s        Normal   Pulled              pod/my-pod-2-6d455bd7cc-djj9n    Container image "nginx:alpine" 
+already present on machine
+6m5s        Normal   Created             pod/my-pod-2-6d455bd7cc-djj9n    Created container: nginx       
+6m4s        Normal   Started             pod/my-pod-2-6d455bd7cc-djj9n    Started container nginx        
+7m24s       Normal   Scheduled           pod/my-pod-2-6d455bd7cc-v2stw    Successfully assigned lab4/my-pod-2-6d455bd7cc-v2stw to minikube
+7m23s       Normal   Pulled              pod/my-pod-2-6d455bd7cc-v2stw    Container image "nginx:alpine" 
+already present on machine
+7m23s       Normal   Created             pod/my-pod-2-6d455bd7cc-v2stw    Created container: nginx       
+7m23s       Normal   Started             pod/my-pod-2-6d455bd7cc-v2stw    Started container nginx        
+10m         Normal   Scheduled           pod/my-pod-2-6d455bd7cc-x79sm    Successfully assigned lab4/my-pod-2-6d455bd7cc-x79sm to minikube
+10m         Normal   Pulled              pod/my-pod-2-6d455bd7cc-x79sm    Container image "nginx:alpine" 
+already present on machine
+10m         Normal   Created             pod/my-pod-2-6d455bd7cc-x79sm    Created container: nginx       
+10m         Normal   Started             pod/my-pod-2-6d455bd7cc-x79sm    Started container nginx        
+7m24s       Normal   Killing             pod/my-pod-2-6d455bd7cc-x79sm    Stopping container nginx       
+10m         Normal   SuccessfulCreate    replicaset/my-pod-2-6d455bd7cc   Created pod: my-pod-2-6d455bd7cc-x79sm
+7m24s       Normal   SuccessfulCreate    replicaset/my-pod-2-6d455bd7cc   Created pod: my-pod-2-6d455bd7cc-v2stw
+6m7s        Normal   SuccessfulCreate    replicaset/my-pod-2-6d455bd7cc   Created pod: my-pod-2-6d455bd7cc-djj9n
+10m         Normal   ScalingReplicaSet   deployment/my-pod-2              Scaled up replica set my-pod-2-6d455bd7cc from 0 to 1
+6m7s        Normal   ScalingReplicaSet   deployment/my-pod-2              Scaled up replica set my-pod-2-6d455bd7cc from 1 to 2
+3m          Normal   Scheduled           pod/my-pod-3-7757fd6f9-dqdq9     Successfully assigned lab4/my-pod-3-7757fd6f9-dqdq9 to minikube
+2m58s       Normal   Pulled              pod/my-pod-3-7757fd6f9-dqdq9     Container image "nginx:alpine" 
+already present on machine
+2m58s       Normal   Created             pod/my-pod-3-7757fd6f9-dqdq9     Created container: nginx       
+2m57s       Normal   Started             pod/my-pod-3-7757fd6f9-dqdq9     Started container nginx        
+3m          Normal   Scheduled           pod/my-pod-3-7757fd6f9-pxrwd     Successfully assigned lab4/my-pod-3-7757fd6f9-pxrwd to minikube
+2m58s       Normal   Pulled              pod/my-pod-3-7757fd6f9-pxrwd     Container image "nginx:alpine" 
+already present on machine
+2m58s       Normal   Created             pod/my-pod-3-7757fd6f9-pxrwd     Created container: nginx       
+2m57s       Normal   Started             pod/my-pod-3-7757fd6f9-pxrwd     Started container nginx        
+4m16s       Normal   Scheduled           pod/my-pod-3-7757fd6f9-xlzt7     Successfully assigned lab4/my-pod-3-7757fd6f9-xlzt7 to minikube
+4m14s       Normal   Pulled              pod/my-pod-3-7757fd6f9-xlzt7     Container image "nginx:alpine" 
+already present on machine
+4m14s       Normal   Created             pod/my-pod-3-7757fd6f9-xlzt7     Created container: nginx       
+4m14s       Normal   Started             pod/my-pod-3-7757fd6f9-xlzt7     Started container nginx        
+4m16s       Normal   SuccessfulCreate    replicaset/my-pod-3-7757fd6f9    Created pod: my-pod-3-7757fd6f9-xlzt7
+3m          Normal   SuccessfulCreate    replicaset/my-pod-3-7757fd6f9    Created pod: my-pod-3-7757fd6f9-dqdq9
+3m          Normal   SuccessfulCreate    replicaset/my-pod-3-7757fd6f9    Created pod: my-pod-3-7757fd6f9-pxrwd
+4m16s       Normal   ScalingReplicaSet   deployment/my-pod-3              Scaled up replica set my-pod-3-7757fd6f9 from 0 to 1
+3m          Normal   ScalingReplicaSet   deployment/my-pod-3              Scaled up replica set my-pod-3-7757fd6f9 from 1 to 3
